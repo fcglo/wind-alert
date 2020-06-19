@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "deploy": "source .env && sls deploy",
+        "invoke": "source .env && sls invoke -f isItWindy"
+    },
+    "devDependencies": {
+        "serverless": "1.72.0",
+        "serverless-python-requirements": "5.1.0"
+    }
+}

@@ -1,0 +1,33 @@
+service: wind-alert
+frameworkVersion: "=1.72.0"
+
+provider:
+  name: aws
+  runtime: python2.7
+  region: eu-west-1
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - sns:publish
+      Resource: "*"
+
+functions:
+  isItWindy:
+    handler: handler.is_it_windy
+    # Will run every day at 4pm GMT
+    events:
+      - schedule: cron(0 16 * * ? *)
+
+    environment:
+      locationId: ${env:LOCATION_ID}
+      bbcUrl: 'https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/'
+      strongWindThreshold: ${env:THRESHOLD}
+      phoneNumber: ${env:NUMBER}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
