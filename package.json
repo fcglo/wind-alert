@@ -1,7 +1,7 @@
 {
     "scripts": {
         "deploy": "source .env && sls deploy",
-        "invoke": "source .env && sls invoke -f isItWindy"
+        "invoke": "source .env && sls invoke local -f isItWindy"
     },
     "devDependencies": {
         "serverless": "1.72.0",

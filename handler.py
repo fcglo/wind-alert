@@ -22,7 +22,7 @@ def is_it_windy(event, context):
     bbc_response = requests.get(bbc_url + location_id)
     root = ET.fromstring(bbc_response.text)
 
-    next_day = root.find("./channel/item/[link='https://www.bbc.co.uk/weather/" + location_id + "?day=1']")
+    next_day = root.find("./channel/item/[link='https://www.bbc.co.uk/weather/" + location_id + "/day1']")
     
     description = next_day.find("./description").text
     wind_speed_description = description.split(',')[3]
